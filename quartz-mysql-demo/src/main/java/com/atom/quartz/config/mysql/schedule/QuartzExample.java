@@ -1,6 +1,6 @@
-package com.atom.quartz.mysql.schedule;
+package com.atom.quartz.config.mysql.schedule;
 
-import com.atom.quartz.mysql.job.SimpleJob;
+import com.atom.quartz.config.mysql.job.SimpleJob;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 

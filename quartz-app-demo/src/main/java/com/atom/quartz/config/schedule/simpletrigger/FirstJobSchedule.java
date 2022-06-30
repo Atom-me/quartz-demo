@@ -1,6 +1,6 @@
-package com.atom.quartz.schedule.simpletrigger;
+package com.atom.quartz.config.schedule.simpletrigger;
 
-import com.atom.quartz.job.FirstJob;
+import com.atom.quartz.config.job.FirstJob;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package com.atom.quartz.mysql.job;
+package com.atom.quartz.config.mysql.job;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;

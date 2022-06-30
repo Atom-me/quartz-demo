@@ -1,4 +1,4 @@
-package com.atom.quartz.demo;
+package com.atom.quartz.config;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

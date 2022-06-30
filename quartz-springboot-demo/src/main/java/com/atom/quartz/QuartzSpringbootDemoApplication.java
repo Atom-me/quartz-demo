@@ -1,9 +1,11 @@
-package com.atom.quartz.demo;
+package com.atom.quartz;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
+@EnableJpaAuditing
 public class QuartzSpringbootDemoApplication {
 
     public static void main(String[] args) {

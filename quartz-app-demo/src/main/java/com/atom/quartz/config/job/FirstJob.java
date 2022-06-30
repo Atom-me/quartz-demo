@@ -1,11 +1,10 @@
-package com.atom.quartz.job;
+package com.atom.quartz.config.job;
 
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * job类的具体实现，即需要定时执行的具体 某个任务。
