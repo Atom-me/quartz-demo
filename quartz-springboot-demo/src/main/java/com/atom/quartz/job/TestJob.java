@@ -18,6 +18,6 @@ public class TestJob extends QuartzJobBean {
 
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        LOGGER.info("test job execute ......{}", LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        LOGGER.info("============================test job execute ......{}", LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
     }
 }

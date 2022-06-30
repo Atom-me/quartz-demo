@@ -1,6 +1,7 @@
 package com.atom.quartz.controller;
 
 import com.atom.quartz.service.QuartzService;
+import org.quartz.SchedulerException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -53,5 +54,16 @@ public class QuartzController {
     public String deleteTask(String jName, String jGroup) {
         quartzService.deleteJob(jName, jGroup);
         return "删除成功！";
+    }
+
+
+    /**
+     * curl --location --request GET 'localhost:8080/modify?jName=aaaaa&jGroup=bbbbb&cron=0/5 * * * * ?'
+     * 修改任务调度配置
+     */
+    @GetMapping("/modify")
+    public String modifyTask(String jName, String jGroup, String cron) throws SchedulerException {
+        quartzService.modifyJob(jName, jGroup, cron);
+        return "修改成功！";
     }
 }

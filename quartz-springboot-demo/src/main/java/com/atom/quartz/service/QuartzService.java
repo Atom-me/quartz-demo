@@ -1,9 +1,13 @@
 package com.atom.quartz.service;
 
+import com.alibaba.druid.util.StringUtils;
 import org.quartz.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+
+import static org.quartz.CronScheduleBuilder.cronSchedule;
+import static org.quartz.TriggerBuilder.newTrigger;
 
 /**
  * @author Atom
@@ -33,10 +37,10 @@ public class QuartzService {
                     .build();
 
             //给数据库cronTrigger表添加任务记录
-            CronTrigger trigger = TriggerBuilder.newTrigger()
+            CronTrigger trigger = newTrigger()
                     .withIdentity(tName, tGroup)
                     .startNow()
-                    .withSchedule(CronScheduleBuilder.cronSchedule(cron))
+                    .withSchedule(cronSchedule(cron))
                     .build();
 
             scheduler.start();
@@ -86,6 +90,35 @@ public class QuartzService {
             scheduler.deleteJob(JobKey.jobKey(jName, jGroup));
         } catch (SchedulerException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void modifyJob(String jName, String jGroup, String cron) throws SchedulerException {
+
+        JobKey jobKey = new JobKey(jName, jGroup);
+        if (!scheduler.checkExists(jobKey)) {
+            throw new RuntimeException("job do not exists...");
+        }
+        JobDetail jobDetail = scheduler.getJobDetail(jobKey);
+
+        TriggerKey triggerKey = TriggerKey.triggerKey(jName, jGroup);
+
+        // 按新的cronExpression表达式重新构建trigger
+        CronTrigger cronTrigger = newTrigger()
+                .withIdentity(triggerKey)
+                .withSchedule(cronSchedule(cron))
+                .forJob(jobDetail)
+                .build();
+
+        if (scheduler.checkExists(triggerKey)) {
+            CronTrigger oldCronTrigger = (CronTrigger) scheduler.getTrigger(triggerKey);
+            String oldCronExpression = oldCronTrigger.getCronExpression();
+            if (!StringUtils.equalsIgnoreCase(cron, oldCronExpression)) {
+                // reschedule job trigger
+                scheduler.rescheduleJob(triggerKey, cronTrigger);
+            }
+        } else {
+            scheduler.scheduleJob(cronTrigger);
         }
     }
 }
