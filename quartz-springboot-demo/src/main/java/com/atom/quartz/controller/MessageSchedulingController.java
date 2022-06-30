@@ -14,6 +14,16 @@ import java.util.Date;
 import java.util.Optional;
 
 /**
+ * curl --location --request POST 'localhost:8080/messages/schedule-visibility' \
+ * --header 'Content-Type: application/json' \
+ * --data-raw '{
+ * "content":"happy birthday~",
+ * "makeVisibleAt":1656569346000
+ * }'
+ * <p>
+ * <p>
+ * curl --location --request DELETE 'localhost:8080/messages/6/unschedule-visibility'
+ *
  * @author Atom
  */
 @RestController

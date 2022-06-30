@@ -11,7 +11,7 @@ import org.springframework.scheduling.quartz.SpringBeanJobFactory;
  */
 public class AutowiringSpringBeanJobFactory extends SpringBeanJobFactory implements ApplicationContextAware {
 
-    AutowireCapableBeanFactory beanFactory;
+    private AutowireCapableBeanFactory beanFactory;
 
     @Override
     public void setApplicationContext(final ApplicationContext context) {
